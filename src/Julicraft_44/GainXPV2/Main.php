@@ -12,74 +12,73 @@ use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\plugin\Plugin;
 use pocketmine\utils\Config;
 use pocketmine\Player;
+use pocketmine\event\Listener;
 
-class Main extends PluginBase {
+class Main extends PluginBase implements Listener {
 	
-	private static $config;
+	public $config;
 
-	public function onEnable(): void {
-		$this->getLogger()->info(TextFormat::AQUA . "You can now execute /xp");
-
-        $this->saveDefaultConfig();
-		self::$config = $this->getConfig()->getAll();	
+	public function onEnable() {
+		$this->saveDefaultConfig();
+		$this->getServer()->getPluginManager()->registerEvents($this, $this);
+		
+		$this->getLogger()->info("Delete this befor release");
 	}
 
-	public function onCommand(CommandSender $sender, Command $cmd, string $lable, array $args): bool {
-		
-		$target = $this->getServer()->getPlayer($args[1]);
-		
+	public function onCommand(CommandSender $sender, Command $cmd, string $lable, array $args): bool {		
 		switch($cmd->getName()) {
 			case "xp":
 			if($sender instanceof Player) {
 			if($sender->hasPermission("cmd.xp")) {
 			
 			if(!isset($args[0])) {								//add:remove
-				$sender->sendMessage("Usage: /xp <add:remove> <Player> <Amount>");
+				$sender->sendMessage($this->getConfig()->get("command-usage"));
 				return false;
 			}
 			if(!isset($args[1])) {								//Player
-				$sender->sendMessage("Usage: /xp <add:remove> <Player> <Amount>");
+				$sender->sendMessage($this->getConfig()->get("command-usage"));
 				return false;
 			}
 			if(!isset($args[2])) {								//Amount
-				$sender->sendMessage("Usage: /xp <add:remove> <Player> <Amount>");
+				$sender->sendMessage($this->getConfig()->get("command-usage"));
 				return false;
 			}
 			
-			
+			$target = $this->getServer()->getPlayer($args[1]);
 			if($target === null || !$target->isOnline()) {
-				$sender->sendMessage("Player not found or isn't online");
+				$sender->sendMessage($this->getConfig()->get("not-found"));
 				return false;
 			}
 
 			if($args[0]) {
 				switch(strtolower($args[0])) {
 					case "add":
-						
+						$target = $this->getServer()->getPlayer($args[1]);
 						$amount = $args[2];
 						$target->addXpLevels((int)$amount, true);
-						$sender->sendMessage(str_replace(["{amount}", "{target}"], [$amount, $target->getName()], $sender->sendMessage("You added " .  $amount . "xp to " . $target->getName())));
-						$target->sendMessage(str_replace(["{amount}", "{sender}"], [$amount, $sender->getName()], $target->sendMessage("You gain " . $amount . "xp from " . $sender->getName())));
+						$sender->sendMessage(str_replace(["{amount}", "{target}"], [$amount, $target->getName()], $sender->sendMessage($this->getConfig()->get("succsess-sender-add"))));
+						$target->sendMessage(str_replace(["{amount}", "{sender}"], [$amount, $sender->getName()], $target->sendMessage($this->getConfig()->get("succsess-target-add"))));
 						break;
 					case "remove":
-						
+					
+						$target = $this->getServer()->getPlayer($args[1]);
 						$current = $target->getXpLevel();
 						$amount = $args[2];
 						
 						if($current >= $amount) {
-						
+						$target = $this->getServer()->getPlayer($args[1]);
 						$amount = $args[2];
 						$target->subtractXpLevels((int)$amount, true);
-						$sender->sendMessage(str_replace(["{amount}", "{target}"], [$amount, $target->getName()], $sender->sendMessage("You removed " . $amount . "xp from " .  $target->getName())));
-						$target->sendMessage(str_replace(["{amount}", "{sender}"], [$amount, $sender->getName()], $target->sendMessage("You lose ". $amount . "xp from " . $sender->getName())));
+						$sender->sendMessage(str_replace(["{amount}", "{target}"], [$amount, $target->getName()], $sender->sendMessage($this->getConfig()->get("succsess-sender-rem"))));
+						$target->sendMessage(str_replace(["{amount}", "{sender}"], [$amount, $sender->getName()], $target->sendMessage($this->getConfig()->get("succsess-target-rem"))));
 						break;
 						} else {
-							$sender->sendMessage("The amount is too high. Player " . $target->getName() . " has an amount of " . $current . "xp");
+							$sender->sendMessage(str_replace(["{target}", "{current}", "{amount}"], [$target->getName(), $current, $amount], $sender->sendMessage($this->getConfig()->get("to-high-amount"))));
 						}
 				}
 			}
 			} else {
-				$sender->sendMessage("You do not have the permission to run this command");
+				$sender->sendMessage($this->getConfig()->get("no-perm"));
 			}
 			} else {
 				$sender->sendMessage("Please run this command In-Game");

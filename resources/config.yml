@@ -1,24 +1,16 @@
-messages:
-#Message: When a player run the xp command wwrongly
-    command-usage: "Usage: /xp <add:remove> <Player> <Amount>"
+---
+command-usage: "Usage: /xp <add:remove> <Player> <Amount>"
 
-#Message: When the player do not have the permission to tun the /xp command
-    no-perm: "You do not have the permission to run this command"
+no-perm: "You do not have the permission to run this command"
 
-# {amount} = Amount of the xp levels
-# {target} = Target who get the xp
-# {sender} = Sender who run the xp command
+to-high-amount: "The amount of {amount}xp is too high. Player {taget} has only {current}xp levels"
 
-#Message: Send this to the player who run the /xp add command
-    succsess-sender-add: "You added {amount} xp to {target}"
+succsess-sender-add: "You added {amount}xp to {target}"
 
-#Message: Send this to the taget that gain the xp levels
-    succsess-taget-add: "You gain {amount} xp from {sender}"
+succsess-target-add: "You gain {amount}xp from {sender}"
 
-#Message:  Send this to the player who run the /xp remove command
-    succsess-sender-rem: "You removed {amount} xp from {target}"
+succsess-sender-rem: "You removed {amount}xp from {target}"
 
-#Message: Send this to the target that lose the xp levels
-    succsess-sender-rem: "You lose {amount} xp from {sender}"
+succsess-target-rem: "You lose {amount}xp from {sender}"
 ...
 
