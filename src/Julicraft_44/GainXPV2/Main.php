@@ -55,9 +55,16 @@ class Main extends PluginBase implements Listener {
 					case "add":
 						$target = $this->getServer()->getPlayer($args[1]);
 						$amount = $args[2];
+						
 						$target->addXpLevels((int)$amount, true);
-						$sender->sendMessage(str_replace(["{amount}", "{target}"], [$amount, $target->getName()], $sender->sendMessage($this->getConfig()->get("succsess-sender-add"))));
-						$target->sendMessage(str_replace(["{amount}", "{sender}"], [$amount, $sender->getName()], $target->sendMessage($this->getConfig()->get("succsess-target-add"))));
+					
+						$msg = $this->getConfig()->get("succsess-sender-add");
+						$msg = str_replace("%amount", "$amount", $msg);
+						$sender->sendMessage($msg);
+						
+						$msg = $this->getConfig()->get("succsess-target-add");
+						$msg = str_replace("%amount", "$amount", $msg);
+						$target->sendMessage($msg);
 						break;
 					case "remove":
 					
@@ -68,12 +75,22 @@ class Main extends PluginBase implements Listener {
 						if($current >= $amount) {
 						$target = $this->getServer()->getPlayer($args[1]);
 						$amount = $args[2];
+						
 						$target->subtractXpLevels((int)$amount, true);
-						$sender->sendMessage(str_replace(["{amount}", "{target}"], [$amount, $target->getName()], $sender->sendMessage($this->getConfig()->get("succsess-sender-rem"))));
-						$target->sendMessage(str_replace(["{amount}", "{sender}"], [$amount, $sender->getName()], $target->sendMessage($this->getConfig()->get("succsess-target-rem"))));
+						
+						$msg = $this->getConfig()->get("succsess-sender-rem");
+						$msg = str_replace("%amount", "$amount", $msg);
+						$sender->sendMessage($msg);
+						
+						$msg = $this->getConfig()->get("succsess-target-rem");
+						$msg = str_replace("%amount", "$amount", $msg);
+						$target->sendMessage($msg);
 						break;
 						} else {
-							$sender->sendMessage(str_replace(["{target}", "{current}", "{amount}"], [$target->getName(), $current, $amount], $sender->sendMessage($this->getConfig()->get("to-high-amount"))));
+							$msg = $this->getConfig()->get("to-high-amount");
+							$msg = str_replace("%amount", "$amount", $msg);
+							$msg = str_replace("%current", "$current", $msg);
+							$sender->sendMessage($msg);
 						}
 				}
 			}

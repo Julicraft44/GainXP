@@ -3,14 +3,16 @@ command-usage: "Usage: /xp <add:remove> <Player> <Amount>"
 
 no-perm: "You do not have the permission to run this command"
 
-to-high-amount: "The amount of {amount}xp is too high. Player {taget} has only {current}xp levels"
+no-found: "This player cannot be found or isn't online"
 
-succsess-sender-add: "You added {amount}xp to {target}"
+to-high-amount: "The amount of %amount xp is too high. Only %current xp levels are avalable"
 
-succsess-target-add: "You gain {amount}xp from {sender}"
+succsess-sender-add: "You added %amount xp to a player"
 
-succsess-sender-rem: "You removed {amount}xp from {target}"
+succsess-target-add: "You gain %amount xp from a player"
 
-succsess-target-rem: "You lose {amount}xp from {sender}"
+succsess-sender-rem: "You removed %amount xp from a player"
+
+succsess-target-rem: "You lose %amount xp"
 ...
 

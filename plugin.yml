@@ -1,13 +1,12 @@
 ---
 name: GainXPV2
-version: 1.0.0
+version: 1.1.0
 main: Julicraft_44\GainXPV2\Main
 api: 3.0.0
 
 commands:
     xp:
         description: gain or remove xp from a spezific player
-        #usage: /xp <add:remove> <Player> <Amount>
         permission: cmd.xp
         
 permissions:
