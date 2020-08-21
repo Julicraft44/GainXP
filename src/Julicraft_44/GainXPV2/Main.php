@@ -22,7 +22,7 @@ class Main extends PluginBase implements Listener {
 		$this->saveDefaultConfig();
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		
-		if($this->getConfig()->get("version") !== 1) {
+		if($this->getConfig()->get("version") !== 1.2) {
 			$this->getLogger()->critical("The version of the config is outdated. Download the newest version of the plugin or reload the server to check if the plugin fix it's self");
 			rename("plugin_data/GainXPV2/config.yml", "plugin_data/GainXPV2/config.yml.old");
 		}
@@ -55,12 +55,14 @@ class Main extends PluginBase implements Listener {
 
 			if($args[0]) {
 				switch(strtolower($args[0])) {
-					
+
 					case "add":
-					
+
 						$target = $this->getServer()->getPlayer($args[1]);
 						$current = $target->getXpLevel();
 						$amount = $args[2];
+						$tar_name = $target->getName();
+						$send_name = $sender->getName();
 						
 						if($amount + $current <= 24791) {
 						$target = $this->getServer()->getPlayer($args[1]);
@@ -71,10 +73,14 @@ class Main extends PluginBase implements Listener {
 					
 						$msg = $this->getConfig()->get("success-sender-add");
 						$msg = str_replace("%amount", "$amount", $msg);
+						$msg = str_replace("%send_name", "$send_name", $msg);
+						$msg = str_replace("%tar_name", "$tar_name", $msg);
 						$sender->sendMessage($msg);
 						
 						$msg = $this->getConfig()->get("success-target-add");
 						$msg = str_replace("%amount", "$amount", $msg);
+						$msg = str_replace("%send_name", "$send_name", $msg);
+						$msg = str_replace("%tar_name", "$tar_name", $msg);
 						$target->sendMessage($msg);
 						} else {
 							$msg = $this->getConfig()->get("to-high-end");
@@ -83,12 +89,14 @@ class Main extends PluginBase implements Listener {
 							$sender->sendMessage($msg);
 						}
 						break;
-						
+
 					case "remove":
-					
+
 						$target = $this->getServer()->getPlayer($args[1]);
 						$current = $target->getXpLevel();
 						$amount = $args[2];
+						$tar_name = $target->getName();
+						$send_name = $sender->getName();
 						
 						if($current >= $amount) {
 						$target = $this->getServer()->getPlayer($args[1]);
@@ -98,10 +106,14 @@ class Main extends PluginBase implements Listener {
 						
 						$msg = $this->getConfig()->get("success-sender-rem");
 						$msg = str_replace("%amount", "$amount", $msg);
+						$msg = str_replace("%send_name", "$send_name", $msg);
+						$msg = str_replace("%tar_name", "$tar_name", $msg);
 						$sender->sendMessage($msg);
 						
 						$msg = $this->getConfig()->get("success-target-rem");
 						$msg = str_replace("%amount", "$amount", $msg);
+						$msg = str_replace("%send_name", "$send_name", $msg);
+						$msg = str_replace("%tar_name", "$tar_name", $msg);
 						$target->sendMessage($msg);
 						
 						} else {
@@ -117,9 +129,11 @@ class Main extends PluginBase implements Listener {
 						$target = $this->getServer()->getPlayer($args[1]);
 						$current = $target->getXpLevel();
 						$amount = $args[2];
+						$tar_name = $target->getName();
+						$send_name = $sender->getName();
 						
 						if($current >= $amount) {
-						if($amount + $current >= 24791) {
+						if($amount + $current <= 24791) {
 						$target = $this->getServer()->getPlayer($args[1]);
 						$amount = $args[2];
 							
@@ -128,10 +142,14 @@ class Main extends PluginBase implements Listener {
 						
 						$msg = $this->getConfig()->get("success-target-drop");
 						$msg = str_replace("%amount", "$amount", $msg);
+						$msg = str_replace("%send_name", "$send_name", $msg);
+						$msg = str_replace("%tar_name", "$tar_name", $msg);
 						$target->sendMessage($msg);
 						
 						$msg = $this->getConfig()->get("success-sender-drop");
 						$msg = str_replace("%amount", "$amount", $msg);
+						$msg = str_replace("%send_name", "$send_name", $msg);
+						$msg = str_replace("%tar_name", "$tar_name", $msg);
 						$sender->sendMessage($msg);
 						} else {
 							$msg = $this->getConfig()->get("to-high-end");
