@@ -12,7 +12,7 @@ Permission: gainxp.use
 
 # Config
 
-version: 1
+version: 1.2
 
 
 command-usage: "Usage: /xp <add:remove:drop> Player Amount"
@@ -25,22 +25,20 @@ to-high-amount: "The amount of %amount xp is too high. Only %current xp levels a
 
 to-high-end: "The maximum of xp levels are 24791"
 
-success-sender-add: "You added %amount xp to a player"
+success-sender-add: "You added %amount xp to %tar_name"
 
-success-target-add: "You gain %amount xp from a player"
+success-target-add: "You gain %amount xp from %send_name"
 
-success-sender-rem: "You removed %amount xp from a player"
+success-sender-rem: "You removed %amount xp from %tar_name"
 
 success-target-rem: "You lose %amount xp"
 
-success-sender-drop: "You dropped %amount to a player"
+success-sender-drop: "You dropped %amount to %tar_name"
 
-success-target-drop: "You gain %amount from a player"
+success-target-drop: "You gain %amount from a %send_name"
 
 # Coming Soon
 - xp see Player (Can show you the xp level of a player)
-
-- More configuration
 
 - (Clean up some code)
 
