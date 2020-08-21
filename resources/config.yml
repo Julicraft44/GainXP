@@ -1,18 +1,23 @@
 ---
+#DO NOT EDIT This
+#THIS IS ONLY FOR DEV
+version: 1
+
+#Message: When you do not use the right usage of the xp command
 command-usage: "Usage: /xp <add:remove> <Player> <Amount>"
-
+#Message: When you not have the permission to execute this command
 no-perm: "You do not have the permission to run this command"
-
+#Message: When the player you want to get is not online 
 no-found: "This player cannot be found or isn't online"
-
+#Message: When you try to remove more xp than the target has
 to-high-amount: "The amount of %amount xp is too high. Only %current xp levels are avalable"
-
+#Message: When you successfully added xp to a player
 succsess-sender-add: "You added %amount xp to a player"
-
+#Message: Show to the target you added xp
 succsess-target-add: "You gain %amount xp from a player"
-
+#Message: When you successfully removed xp from a player
 succsess-sender-rem: "You removed %amount xp from a player"
-
+#Message: Show to the target who lose xp
 succsess-target-rem: "You lose %amount xp"
 ...
 

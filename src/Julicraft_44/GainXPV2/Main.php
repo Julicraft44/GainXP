@@ -22,7 +22,11 @@ class Main extends PluginBase implements Listener {
 		$this->saveDefaultConfig();
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		
-		$this->getLogger()->info("Delete this befor release");
+		if($this->getConfig()->get("version") !== 1) {
+			$this->getLogger()->critical("The version of the config is outdated. Download the newest version of the plugin or reload the server to check if the plugin fix it's self");
+			rename("plugin_data/GainXPV2/config.yml", "plugin_data/GainXPV2/config.yml.old");
+			$this->saveDefaultConfig;
+		}
 	}
 
 	public function onCommand(CommandSender $sender, Command $cmd, string $lable, array $args): bool {		
