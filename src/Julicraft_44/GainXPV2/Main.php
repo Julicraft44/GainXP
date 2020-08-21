@@ -1,5 +1,5 @@
 <?php
-//update with config coming soon
+
 declare(strict_types=1);
 
 namespace Julicraft_44\GainXPV2;
@@ -25,7 +25,6 @@ class Main extends PluginBase implements Listener {
 		if($this->getConfig()->get("version") !== 1) {
 			$this->getLogger()->critical("The version of the config is outdated. Download the newest version of the plugin or reload the server to check if the plugin fix it's self");
 			rename("plugin_data/GainXPV2/config.yml", "plugin_data/GainXPV2/config.yml.old");
-			$this->saveDefaultConfig;
 		}
 	}
 
@@ -56,8 +55,16 @@ class Main extends PluginBase implements Listener {
 
 			if($args[0]) {
 				switch(strtolower($args[0])) {
+					
 					case "add":
+					
 						$target = $this->getServer()->getPlayer($args[1]);
+						$current = $target->getXpLevel();
+						$amount = $args[2];
+						
+						if($amount + $current <= 24791) {
+						$target = $this->getServer()->getPlayer($args[1]);
+						$current = $target->getXpLevel();
 						$amount = $args[2];
 						
 						$target->addXpLevels((int)$amount, true);
@@ -69,7 +76,14 @@ class Main extends PluginBase implements Listener {
 						$msg = $this->getConfig()->get("succsess-target-add");
 						$msg = str_replace("%amount", "$amount", $msg);
 						$target->sendMessage($msg);
+						} else {
+							$msg = $this->getConfig()->get("to-high-end");
+							$msg = str_replace("%amount", "$amount", $msg);
+							$msg = str_replace("%current", "$current", $msg);
+							$sender->sendMessage($msg);
+						}
 						break;
+						
 					case "remove":
 					
 						$target = $this->getServer()->getPlayer($args[1]);
@@ -89,13 +103,50 @@ class Main extends PluginBase implements Listener {
 						$msg = $this->getConfig()->get("succsess-target-rem");
 						$msg = str_replace("%amount", "$amount", $msg);
 						$target->sendMessage($msg);
-						break;
+						
 						} else {
 							$msg = $this->getConfig()->get("to-high-amount");
 							$msg = str_replace("%amount", "$amount", $msg);
 							$msg = str_replace("%current", "$current", $msg);
 							$sender->sendMessage($msg);
 						}
+						break;
+						
+					case "drop":
+					
+						$target = $this->getServer()->getPlayer($args[1]);
+						$current = $target->getXpLevel();
+						$amount = $args[2];
+						
+						if($current >= $amount) {
+						if($amount + $current >= 24791) {
+						$target = $this->getServer()->getPlayer($args[1]);
+						$amount = $args[2];
+							
+						$target->addXpLevels((int)$amount, true);
+						$sender->subtractXpLevels((int)$amount, true);
+						
+						$msg = $this->getConfig()->get("succsess-target-drop");
+						$msg = str_replace("%amount", "$amount", $msg);
+						$target->sendMessage($msg);
+						
+						$msg = $this->getConfig()->get("succsess-sender-drop");
+						$msg = str_replace("%amount", "$amount", $msg);
+						$sender->sendMessage($msg);
+						} else {
+							$msg = $this->getConfig()->get("to-high-end");
+							$msg = str_replace("%amount", "$amount", $msg);
+							$msg = str_replace("%current", "$current", $msg);
+							$sender->sendMessage($msg);
+						}
+						} else {
+							$msg = $this->getConfig()->get("to-high-amount");
+							$msg = str_replace("%amount", "$amount", $msg);
+							$msg = str_replace("%current", "$current", $msg);
+							$sender->sendMessage($msg);
+						}
+						break;
+						
 				}
 			}
 			} else {

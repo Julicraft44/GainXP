@@ -4,13 +4,15 @@
 version: 1
 
 #Message: When you do not use the right usage of the xp command
-command-usage: "Usage: /xp <add:remove> <Player> <Amount>"
+command-usage: "Usage: /xp <add:remove:drop> <Player> <Amount>"
 #Message: When you not have the permission to execute this command
 no-perm: "You do not have the permission to run this command"
 #Message: When the player you want to get is not online 
-no-found: "This player cannot be found or isn't online"
+not-found: "This player cannot be found or isn't online"
 #Message: When you try to remove more xp than the target has
 to-high-amount: "The amount of %amount xp is too high. Only %current xp levels are avalable"
+#Message: When you want to add or drop more than 24791
+to-high-end: "The maximum of xp levels are 24791"
 #Message: When you successfully added xp to a player
 succsess-sender-add: "You added %amount xp to a player"
 #Message: Show to the target you added xp
@@ -19,5 +21,9 @@ succsess-target-add: "You gain %amount xp from a player"
 succsess-sender-rem: "You removed %amount xp from a player"
 #Message: Show to the target who lose xp
 succsess-target-rem: "You lose %amount xp"
+#Message: When you dropped some of your xp levels to a player
+succsess-sender-drop: "You dropped %amount to a player"
+#Message: Show to the target that gain the dropped amount of xp
+succsess-target-drop: "You gain %amount from a player"
 ...
 
