@@ -29,7 +29,7 @@ class Main extends PluginBase implements Listener {
 		switch($cmd->getName()) {
 			case "xp":
 			if($sender instanceof Player) {
-			if($sender->hasPermission("cmd.xp")) {
+			if($sender->hasPermission("gainxp.use")) {
 			
 			if(!isset($args[0])) {								//add:remove
 				$sender->sendMessage($this->getConfig()->get("command-usage"));

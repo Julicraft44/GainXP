@@ -7,10 +7,10 @@ api: 3.0.0
 commands:
     xp:
         description: gain or remove xp from a spezific player
-        permission: cmd.xp
+        permission: gainxp.use
         
 permissions:
-    cmd.xp:
+    gainxp.use:
         description: xp permission
         default: op
 ...
