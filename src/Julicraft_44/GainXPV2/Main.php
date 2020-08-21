@@ -69,11 +69,11 @@ class Main extends PluginBase implements Listener {
 						
 						$target->addXpLevels((int)$amount, true);
 					
-						$msg = $this->getConfig()->get("succsess-sender-add");
+						$msg = $this->getConfig()->get("success-sender-add");
 						$msg = str_replace("%amount", "$amount", $msg);
 						$sender->sendMessage($msg);
 						
-						$msg = $this->getConfig()->get("succsess-target-add");
+						$msg = $this->getConfig()->get("success-target-add");
 						$msg = str_replace("%amount", "$amount", $msg);
 						$target->sendMessage($msg);
 						} else {
@@ -96,11 +96,11 @@ class Main extends PluginBase implements Listener {
 						
 						$target->subtractXpLevels((int)$amount, true);
 						
-						$msg = $this->getConfig()->get("succsess-sender-rem");
+						$msg = $this->getConfig()->get("success-sender-rem");
 						$msg = str_replace("%amount", "$amount", $msg);
 						$sender->sendMessage($msg);
 						
-						$msg = $this->getConfig()->get("succsess-target-rem");
+						$msg = $this->getConfig()->get("success-target-rem");
 						$msg = str_replace("%amount", "$amount", $msg);
 						$target->sendMessage($msg);
 						
@@ -126,11 +126,11 @@ class Main extends PluginBase implements Listener {
 						$target->addXpLevels((int)$amount, true);
 						$sender->subtractXpLevels((int)$amount, true);
 						
-						$msg = $this->getConfig()->get("succsess-target-drop");
+						$msg = $this->getConfig()->get("success-target-drop");
 						$msg = str_replace("%amount", "$amount", $msg);
 						$target->sendMessage($msg);
 						
-						$msg = $this->getConfig()->get("succsess-sender-drop");
+						$msg = $this->getConfig()->get("success-sender-drop");
 						$msg = str_replace("%amount", "$amount", $msg);
 						$sender->sendMessage($msg);
 						} else {
