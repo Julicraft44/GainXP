@@ -20,3 +20,9 @@ In progress
 - More configuration
 
 - (Clean up some code)
+
+# Support
+
+Wanna help to make the plugin better?
+
+Text me on Discord(Julicraft_44#1866) or create a issue on GitHub
