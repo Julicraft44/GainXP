@@ -40,6 +40,8 @@ success-target-drop: "You gain %amount from a %send_name"
 # Coming Soon
 - xp see Player (Can show you the xp level of a player)
 
+- (more like vanilla minecraft)
+
 - (Clean up some code)
 
 # Support
