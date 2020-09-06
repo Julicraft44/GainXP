@@ -2,7 +2,7 @@
 
 #### Add, remove or drop xp levels 
 
-- xp add Julicraft_44 10 (Adds Julicraft 10 xp level to the player)
+- xp add Julicraft_44 10 (Adds Julicraft_44 10 xp level to the player)
 
 - xp remove Dinnerbone 10 (Removes Dinnerbone 10 xp level from the player)
 
